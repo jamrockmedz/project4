@@ -1,22 +1,21 @@
-import flask
-import auth
-import model
-import util
+from flask import Flask, request
+from flask import render_template
 import urllib2
 import json
 import random
 import uuid
-
-from main import app
-from flask.ext import wtf
-from utilities import funnames
 from google.appengine.api import users
 from google.appengine.api import channel
+from utilities import funnames
+
+import auth
+
+from main import app
 
   
 @app.route('/one_player/')
 def one_player():
-	return flask.render_template(
+	return render_template(
 		'one_player.html',
 		html_class='one-player',
 		title='Memory Game'
@@ -24,7 +23,7 @@ def one_player():
 
 @app.route('/two_player/')
 def two_player():
-	return flask.render_template(
+	return render_template(
 		'two_player.html',
 		html_class='two-player',
 		title='Memory Game'
@@ -46,7 +45,7 @@ def two_player_network():
 						"url": 'project4.620057315.appspot.com/'+gameid
 						}
     
-	return flask.render_template(
+	return render_template(
 		'two_player_network.html',
 		values=template_values,
 		html_class='setup-two-player-network',
@@ -65,14 +64,14 @@ def join_game(gameid):
 						"token": channel.create_channel(name + gameid),
 						"yourname": name
 						}
-	return flask.render_template("two_player_network.html", values=template_values)
+	return render_template("two_player_network.html", values=template_values)
 
 
 @app.route('/sendcontent/<user>/<gameid>', methods=['GET', 'POST'])
-def sendcontent(user,gameid):
-	"""send game content data"""
-	content = request.form['content']
-	channel.send_message(user+gameid,content)
+def sendmessage(user,gameid):
+    """sends a message that is useless"""
+    message = request.form['message']
+    channel.send_message(user+gameid,message)
     
 @app.errorhandler(404)
 def page_not_found(e):

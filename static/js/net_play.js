@@ -1,3 +1,24 @@
+var currentuser 
+var gameid 
+
+
+window.onload = function(){
+    currentuser = document.getElementById("playername").innerHTML;
+	
+	gameid = document.getElementById("gameid").innerHTML;
+	
+	//alert("Current User: " + currentuser + " Gameid: " + gameid);
+
+}
+
+function test(){
+	
+	alert("Current User: " + currentuser + " Gameid: " + gameid);
+	return 1;
+
+}
+
+
 var onClose = function() {
  alert("connection lost try to refresh");
   }
@@ -8,18 +29,15 @@ var onError = function() {
 
 var onMessage = function(message) {
   console.log("we have a message: " + message.data); 
+  test();
   closePlayerMenu();
 }
 
 
 var onOpened = function() {
   //figure out otherusername
-	
-	var currentuser = location.href.split('/').reverse()[0];
-	
-	var gameid = document.getElementById("gameid").innerHTML;
-	
-	sendContent("test", gameid, "sample");
+		
+	sendMessage(currentuser, gameid, "sample");
 	closePlayerMenu();
         
 }
@@ -28,12 +46,12 @@ var onOpened = function() {
 // these are then sent to the other user via
 // the channel api, look for the /sendmessage route
 // in the main.py file
-var sendContent = function(name,gameid,content) 
+var sendMessage = function(name,gameid,content) 
 {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/sendcontent/' + name + '/' + gameid, true);
 	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send("content="+content);
+	xhr.send("message="+content);
 };
 
 
