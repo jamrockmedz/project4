@@ -1,0 +1,67 @@
+
+
+#playerTwoTurn{
+  background: red;
+  border-radius: 1000px;
+  background-image: radial-gradient(brown, transparent);
+  background-size: 5px 5px; 
+  border: dotted 2px red;
+  -webkit-animation: blink 3s 0s infinite;
+  animation: 13s green infinite;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px red;
+	opacity: .8
+}
+
+
+#playerOneTurn{
+  background: green;
+  background-image: radial-gradient(lime, transparent);
+  background-size: 5px 5px;
+  border: dotted 2px lime;
+   box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px lime;
+ -webkit-animation: blink 3s 0s infinite;
+  animation: 13s green infinite;
+}
+
+@-webkit-keyframes stop{
+  0%{opacity: .3}
+  100%{opacity: .2}
+}
+
+@-webkit-keyframes blink{
+  0%{opacity: .4}
+  20%{opacity: .8}
+  40%{opacity: .6}
+  60%{opacity: 1}
+  80%{opacity: 1}
+  83%{opacity: .1}
+  86%{opacity: 1}
+  89%{opacity: .1}
+  93%{opacity: 1}
+  96%{opacity: .1}
+  100%{opacity: 1}
+}
+
+
+@keyframes blink{
+  0%{opacity: .1}
+  20%{opacity: .1}
+  40%{opacity: .1}
+  60%{opacity: 1}
+  80%{opacity: 1}
+  83%{opacity: .1}
+  86%{opacity: 1}
+  89%{opacity: .1}
+  93%{opacity: 1}
+  96%{opacity: .1}
+  100%{opacity: 1}
+}
+
+@keyframes stop{
+   0%{opacity: .3}
+  100%{opacity: .2}
+}

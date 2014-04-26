@@ -1,0 +1,69 @@
+# extends 'base.html'
+
+<!-- manifest={{ url_for('static', filename='offline.manifest') }} type="text/cache-manifest" -->
+# block header
+		<title>Memory Game</title>
+        <script src="/p/js/one_player.js"></script>
+		<script src="/p/js/jquery.js"></script>
+		<script src="/p/js/nav.js"></script>
+		<link rel="stylesheet" type"text/css" href="/p/css/style.css"/>
+        <link rel="stylesheet" type"text/css" href="/p/css/memory.css"/>
+		<link rel="stylesheet" type"text/css" href="/p/css/indicator.css"/>
+# endblock
+
+# block content
+		<ul id="navigation">           
+					
+            <li id="save"><a id="saveGame" title="Save Game">Save Game</a></li>
+            
+            <li id="save"><a id="newGame" title="New Game">New Game</a></li>
+            
+			<li id="username">
+				<div id="subName" style="display:none;">
+					<input type="text" id="name"  value="Enter Name..." onfocus="if (this.value == 'Enter Name...') 
+					{this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Name...';}">
+					<div id="buttons">
+						<input class="button" type="button" id="saveNameButton" name="save" value="Save">
+						<input class="button" type="button" id="cancel" name="cancel" value="Cancel">
+					</div>
+				</div>
+			</li>
+			
+			
+			<li>
+				<a id="saveName" title="Update Player Name">Update Name</a>
+			</li>
+						            
+		</ul>
+
+    
+
+<div class="clear"></div>
+<div id = "content">
+<div id="scoreBoard">
+	<div id="area">
+		<div id="playerOneScore"></div>
+		<div id="playerTwoScore"></div>
+	</div>
+</div>
+
+
+<div class="flipper">
+
+    <div id="flip-front"><h1>Memory Card Game</h1></div>
+
+    <div id="flip-back">You have 24 peeks!</div>			
+
+</div>
+
+<br>
+<br>
+<div id="game"></div>
+<div class="clear"></div>
+
+</div>
+<div class="clear"></div>
+<div class="clear"></div>
+</div>
+
+# endblock

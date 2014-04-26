@@ -1,0 +1,23 @@
+# extends 'base.html'
+
+# block header
+
+		<title>Memory Game</title>
+		<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+#endblock
+
+# block content
+
+			<h3>Welcome {{values.yourname}} to the <span id="gameid">{{values.gameid}}</span> Game</h3>
+			
+			<div id="status">Waiting for 
+				<span class="label label-success" id="otheruser"></span>.
+				
+				<!-- Invite a friend by typing their name here: <input type="text" id="name"/> -->
+				<div class="chatbox">
+					<p>Share this URL with them:</p>
+					<input id="gameurl" type="text" value=""/>
+				</div>
+			</div>
+			
+# endblock

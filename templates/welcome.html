@@ -1,0 +1,52 @@
+# extends 'base.html'
+
+# block header
+<link rel="stylesheet" type"text/css" href="/p/css/menu.css"/>
+<link rel="stylesheet" type"text/css" href="/p/css/card_hand.css"/>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Memory Card Game!</h1>
+      <p></p>
+    </div>
+  </div>
+# endblock
+
+# block content
+  <div class="row">
+	  
+    <div class="col-sm-6 col-md-5 col-lg-4" >
+      	<a id="circle_option" href="{{url_for('one_player')}}"><H2>One Player</H2></a>
+    </div>
+    
+    <div class="col-sm-6 col-md-5 col-lg-4">
+		<a id="circle_option" href="{{url_for('two_player')}}"><H2>Two Player</H2></a>
+    </div>
+   
+    <div class="col-sm-8 col-md-5 col-lg-4">
+      <a id="circle_option" href="{{url_for('two_player_network')}}"><H2>Two Player Network</H2></a>
+    </div>
+    
+	</div>
+  
+	<div class="row">
+		<div class="hand spread">
+	 
+		  <div class="card suitdiamonds">
+			<p>A</p>
+		  </div>
+		 
+		  <div class="card suithearts">
+			<p>A</p>
+		  </div>
+		   
+		  <div class="card suitclubs">
+			<p>A</p>
+		  </div>
+		   
+		  <div class="card suitspades">
+			<p>A</p>
+		  </div>
+	  
+	  </div>
+  </div>
+# endblock

@@ -1,0 +1,19 @@
+# extends 'base.html'
+ 
+# block content
+  <div class="page-header">
+    <h1>{{title}}</h1>
+  </div>
+  <td>
+    <a href="{{url_for('contact_view', contact_id=contact_db.key.id())}}">
+      {{contact_db.name}}
+    </a>
+  </td>
+  <p>{{contact_db.email}}</p>
+  <p>{{contact_db.phone}}</p>
+  <p>{{contact_db.address}}</p>
+  <hr>
+  <p>
+    <a href="{{url_for('contact_list')}}">Back</a>
+  </p>
+# endblock

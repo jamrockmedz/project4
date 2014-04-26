@@ -1,0 +1,67 @@
+# extends 'base.html'
+
+<!-- manifest={{ url_for('static', filename='offline.manifest') }} type="text/cache-manifest" -->
+# block header
+
+    <title>Memory Game</title>
+        <script src="/p/js/two_player.js"></script>
+		<script src="/p/js/jquery.js"></script>
+		<script src="/p/js/nav.js"></script>
+		<link rel="stylesheet" type"text/css" href="/p/css/style.css"/>
+        <link rel="stylesheet" type"text/css" href="/p/css/memory.css"/>
+		<link rel="stylesheet" type"text/css" href="/p/css/indicator.css"/>
+# endblock
+
+# block content
+		<ul id="navigation">
+	
+            <li id="save"><a id="saveGame" title="Save Game">Save Game</a></li>
+            <li id="save"><a id="newGame" title="New Game">New Game</a></li>
+						            
+        </ul>
+
+<div class="clear"></div>
+<div id = "content">
+<div id="scoreBoard">
+	<div id="area">
+		<div id="playerOneScore"></div>
+		<div id="playerTwoScore"></div>
+	</div>
+</div>
+
+
+
+<div id="playerNameD" class="gameModeDialog">
+	<div>
+		<a href="#" title="Close" class="close" id="closePlayerNameD">X</a>
+		<h2>Player One Name</h2>
+		<div>
+				<input type="text" id="playerOneName"  value="Player One Name..." onfocus="if (this.value == 'Player One Name...'){this.value = '';}" onblur="if (this.value == '') {this.value = 'Player One Name...';}"></input>
+				<input type="text" id="playerTwoName"  value="Player Two Name..." onfocus="if (this.value == 'Player Two Name...'){this.value = '';}" onblur="if (this.value == '') {this.value = 'Player Two Name...';}"></input>
+				<input type="button" id="submitMultiName" value="Submit"/>
+		</div>
+		</div>
+</div>
+
+<div class="flipper">
+
+    <div id="flip-front"><h1>Memory Card Game</h1></div>
+
+    <div id="flip-back">You have 24 peeks!</div>
+
+</div>
+
+<br>
+<br>
+<div id="game"></div>
+<div class="clear"></div>
+<div id="turnArea">
+<div id="playerOneTurn"><div>Player One</div></div>
+<div id="playerTwoTurn"><div>Player One</div></div>
+</div>
+<div class="clear"></div>
+<div class="clear"></div>
+</div>
+
+
+# endblock

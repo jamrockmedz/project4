@@ -1,0 +1,30 @@
+#circle_option
+{
+	display: block;
+	background: white;
+	border-radius: 1000px;
+	background-image: radial-gradient(rgb(0, 184, 255), transparent);
+	background-size: 5px 5px;	
+	box-shadow: 0 0 20px #111 inset, 0 0 10px rgb(1, 53, 49);
+	opacity: .8;
+	height: 130px;
+	vertical-align: middle;
+	text-align: center;
+	text-align: -webkit-center;
+	text-decoration: none;
+}
+
+#circle_option h2
+{
+	line-height: 130px;
+}
+
+
+#circle_option:hover
+{
+	background: orange;
+	background-image: radial-gradient(rgb(0, 184, 255), transparent);
+	background-size: 5px 5px;
+	
+	box-shadow: 0 0 20px #111 inset, 0 0 10px rgb(1, 53, 49);
+}
