@@ -42,19 +42,19 @@ def two_player_network():
 						"gameid":gameid,
 						"token": channel.create_channel(name + gameid),
 						"yourname": name,
-						"url": 'project4.620057315.appspot.com/'+gameid
+						"url": 'project4.620057315.appspot.com/'+name+'/'+gameid
 						}
     
 	return render_template(
-		'two_player_network.html',
+		'host_player.html',
 		values=template_values,
 		html_class='setup-two-player-network',
 		title='Memory Game'
 	)
 
-@app.route('/<gameid>')
+@app.route('/<hostplayer>/<gameid>')
 @auth.login_required
-def join_game(gameid):
+def join_game(gameid,hostplayer):
 	"""Return a game page"""
 	user_db = auth.current_user_db()
 	name = user_db.name
@@ -62,9 +62,10 @@ def join_game(gameid):
 	template_values = {
 						"gameid":gameid,
 						"token": channel.create_channel(name + gameid),
-						"yourname": name
+						"yourname": name,
+						"hostplayer":hostplayer
 						}
-	return render_template("two_player_network.html", values=template_values)
+	return render_template("player.html", values=template_values)
 
 
 @app.route('/sendcontent/<user>/<gameid>', methods=['GET', 'POST'])

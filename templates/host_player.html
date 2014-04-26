@@ -1,0 +1,101 @@
+# extends 'base.html'
+
+<!-- manifest={{ url_for('static', filename='offline.manifest') }} type="text/cache-manifest" -->
+# block header
+
+		<title>Memory Game</title>
+        <script src="/p/js/two_player_net.js"></script>
+        <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+		<script src="/p/js/net_play.js"></script>
+		
+		<script src="/p/js/jquery.js"></script>
+		<script src="/p/js/nav.js"></script>
+		<link rel="stylesheet" type"text/css" href="/p/css/loader.css"/>
+		<link rel="stylesheet" type"text/css" href="/p/css/style.css"/>
+        <link rel="stylesheet" type"text/css" href="/p/css/memory.css"/>
+		<link rel="stylesheet" type"text/css" href="/p/css/indicator.css"/>
+# endblock
+
+# block content
+		<ul id="navigation">
+	
+            <li id="save"><a id="saveGame" title="Save Game">Save Game</a></li>
+            <li id="save"><a id="newGame" title="New Game">New Game</a></li>
+						            
+        </ul>
+
+<div class="clear"></div>
+<div id = "content">
+<div id="scoreBoard">
+	<div id="area">
+		<div id="playername">{{ values.yourname }}</div>
+		<div id="token" style="display: none;">{{ values.token }}</div>
+		<div id="gameid" style="display: none;">{{values.gameid}}</div>
+		<div id="playerType" style="display: none;">1</div>
+		<div id="playerOneScore"></div>
+		<div id="playerTwoScore"></div>
+	</div>
+</div>
+
+
+
+<div id="playerNameD" class="gameModeDialog">
+	<div>
+		<!--<a href="#" title="Close" class="close" id="closePlayerNameD">X</a> -->
+		<h2>{{ values.yourname }}</h2>
+		<div>
+			<p>Waiting on other Player</p>
+			<div>
+				<div class="windows8">
+					<div class="wBall" id="wBall_1">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_2">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_3">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_4">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_5">
+						<div class="wInnerBall">
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<br>
+			<p>Share this URL with them:</p>
+			<input id="gameurl" type="text" value={{ values.url }} />
+			
+		</div>
+	</div>
+</div>
+
+<div class="flipper">
+
+    <div id="flip-front"><h1>Memory Card Game</h1></div>
+    <div id="flip-back"></div>
+
+    
+
+</div>
+
+<br>
+<br>
+<div id="game"></div>
+<div class="clear"></div>
+<div id="turnArea">
+<div id="playerOneTurn"><div>{{ values.yourname }}</div></div>
+</div>
+<div class="clear"></div>
+<div class="clear"></div>
+</div>
+
+# endblock

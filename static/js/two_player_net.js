@@ -419,7 +419,17 @@ function updateScoreBoard()
      * "p" is used for "paired" cards that stay visible forever
      * "v" is used for the 1 or 2 cards that we turned on and are currently "visible"
      */
-    function Flip(t)
+     
+     
+    function Flip(card)
+    {
+		flipCard(card);
+		id = card.getAttribute('id');
+		var data = [cardFlipped, playerType, id];
+		sendMessage(gameid, data);
+	}
+	
+    function flipCard(t)
     {
       if((numTries > 0 || gameMode > 1) && gameOver > 0)
 		{	
@@ -614,7 +624,7 @@ function displayDeck()
     {
         // take out a random element from the cards on the deck
        var card = R(deck);
-        deckArea +='<div class="w" onclick="Flip(this)"> <div class="cardfront"><img id="icon" src="/p/img/'+card[0]+'"/><div id="cardNum">'
+        deckArea +='<div class="w" id="card_' + i +'" onclick="Flip(this)"> <div class="cardfront"><img id="icon" src="/p/img/'+card[0]+'"/><div id="cardNum">'
             +card[1]+'</div><img id="icon2" src="/p/img/'+card[0]+'"/></div><div class="cardback"><img id="cardlogo" src="/p/img/cardback.png" /></div></div>'
     }
     // add it to the DOM
