@@ -53,14 +53,16 @@ function newGame()
 	localStorage.removeItem("savedGame");
 	localStorage.removeItem("pairs");
 	document.getElementById("flip-front").innerHTML = "<h1>Memory Card Game</h1>";
+	
+	syncNewGame();
 }
 
 
 function loadGame()
 {
-   var gameData = JSON.parse(localStorage.getItem("savedGame"));
-   gameOver = 1;
-   numTries = gameData[0];   
+	var gameData = JSON.parse(localStorage.getItem("savedGame"));
+	gameOver = 1;
+	numTries = gameData[0];   
 	currentGame.innerHTML = gameData[1];
 	
 	gameMode = 2;
@@ -80,6 +82,7 @@ function loadGame()
 		turnState = gameData[5];
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
 		updatePlayer();
+		
 	}
 	else
 	{
@@ -92,6 +95,9 @@ function loadGame()
 	{
 		pairedCards[i] = temp[i];
 	}
+	
+	syncNewGame();
+	
 }
 
 function setup()
@@ -125,17 +131,9 @@ function setup()
 
 function closePlayerMenu()
 {
-		if(!playerOne[0])
-		{
-			playerOne[0] = "Player One";
-		}
-		
-		if(!playerTwo[0])
-		{
-			playerTwo[0] = "Player Two";
-		}
-				
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
+		document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + 0;
+		document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +" Score: " + 0;
 		saveMPlayerDataToStorage();
 		
 		hideMenu(document.getElementById("playerNameD"));
@@ -146,28 +144,8 @@ function closePlayerMenu()
 //saves player name when multiplayer selected
 function savePlayersName()
 {
-		var temp = document.getElementById("playerOneName").value;
-		
-		if(temp == 'Player One Name...' || temp.length < 1)
-		{
-			playerOne[0] = "Player One";
-		}
-		else 
-		{
-			playerOne[0] = temp;
-		}
-		
-		temp = document.getElementById("playerTwoName").value;
-		
-		if(temp == 'Player Two Name...' || temp.length < 1)
-		{
-			playerTwo[0] = "Player Two";
-		}
-		else 
-		{
-			playerTwo[0] = temp;
-		}
-				
+	
+			
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
 		saveMPlayerDataToStorage();
 		document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + 0;
@@ -387,11 +365,11 @@ function updatePlayer()
 	
 	if(playerTurn > 1)
 	{	
-		playerOneTurn.style.webkitAnimation = "stop 3s 0s infinite";
+		playerOneTurn.style.webkitAnimation = "stop 5s 0s infinite";
 	}
 	else
 	{
-		playerOneTurn.style.webkitAnimation = "blink 3s 0s infinite";
+		playerOneTurn.style.webkitAnimation = "blink 5s 0s infinite";
 	}
 }
 
@@ -423,10 +401,13 @@ function updateScoreBoard()
      
     function Flip(card)
     {
-		flipCard(card);
-		id = card.getAttribute('id');
-		var data = [cardFlipped, playerType, id];
-		sendMessage(gameid, data);
+		if(playerTurn == playerType)
+		{
+			flipCard(card);
+			id = card.getAttribute('id');
+			var data = [cardFlipped, playerType, id];
+			sendMessage(gameid, data);
+		}
 	}
 	
     function flipCard(t)

@@ -1,13 +1,16 @@
 #scoreBoard
-{
-	width: 200px;
+{		
+	width: 157px;
 	text-align: center;
 	position: absolute;
-	padding: 5px 20px 13px 20px;
+	padding: 0 5px 5px 5px;
 	border-radius: 10px;
-	background: #fff;	
+	background: #fff;
 	float: right;
-	display:none;
+	display: none;
+	margin: 20px 0px 0px 20px;
+	
+	
 }
 
 .p1 .cardfront
@@ -50,7 +53,7 @@ display: none;
 
 #playerOneTurn
 {
-float:left;
+	float:left;
 }
 
 #playerTwoTurn
@@ -72,6 +75,17 @@ float:left;
 {
 	font-size: 90%;
 }
+
+#playerOneScore
+{
+	background: green;
+}
+
+ #playerTwoScore
+{
+	background: red;
+}
+
 
 #playerOneScore, #playerTwoScore, #winner
 {

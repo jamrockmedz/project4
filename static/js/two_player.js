@@ -140,6 +140,8 @@ function closePlayerMenu()
 		}
 				
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
+		document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + 0;
+		document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +" Score: " + 0;
 		saveMPlayerDataToStorage();
 		
 		hideMenu(document.getElementById("playerNameD"));
@@ -401,16 +403,16 @@ function updatePlayer()
 			//document.getElementById("turnArea").innerHTML = playerTwo[0] + " turn!!!";
 			//updateClassName(playerTwoTurn, "green");
 			//updateClassName(playerOneTurn, "red");
-			playerTwoTurn.style.webkitAnimation = "blink 3s 0s infinite";
-			playerOneTurn.style.webkitAnimation = "stop 3s 0s infinite";
+			playerTwoTurn.style.webkitAnimation = "blink 6s 0s infinite";
+			playerOneTurn.style.webkitAnimation = "stop 6s 0s infinite";
 		}
 		else
 		{
 			//document.getElementById("turnArea").innerHTML = playerOne[0] + " turn!!!";
 			//updateClassName(playerOneTurn, "green");
 			//updateClassName(playerTwoTurn, "red");
-			playerOneTurn.style.webkitAnimation = "blink 3s 0s infinite";
-			playerTwoTurn.style.webkitAnimation = "stop 3s 0s infinite";
+			playerOneTurn.style.webkitAnimation = "blink 6s 0s infinite";
+			playerTwoTurn.style.webkitAnimation = "stop 6s 0s infinite";
 		}
 }
 

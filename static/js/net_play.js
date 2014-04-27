@@ -3,6 +3,7 @@ var gameid;
 var playerTwoAdded = 2;
 var syncDeck = 3;
 var cardFlipped = 4;
+var newNetGame = 5;
 var otherplayer = "";
 var playerType;
 
@@ -10,8 +11,18 @@ window.onload = function()
 {
 	
     currentuser = document.getElementById("playername").innerHTML;
-	gameid = document.getElementById("gameid").innerHTML;
+    gameid = document.getElementById("gameid").innerHTML;
 	token = document.getElementById("token").innerHTML;
+	playerType = document.getElementById("playerType").innerHTML;
+	
+	if(playerType > 1)
+	{
+		playerTwo[0] = currentuser;
+	}
+	else
+	{
+		playerOne[0] = currentuser;
+	}
 	
 	channel = new goog.appengine.Channel(token);
     socket = channel.open();
@@ -32,11 +43,15 @@ function test(){
 
 
 var onClose = function() {
- alert("connection lost try to refresh");
-  }
+	
+	//alert("connection lost try to refresh");
+
+}
 
 var onError = function() {
- alert("we have an error"); 
+	
+	//alert("we have an error"); 
+	
 }
 
 var onMessage = function(message) {
@@ -45,6 +60,7 @@ var onMessage = function(message) {
 	
   
 	content = JSON.parse(message.data);
+	
 	if(content[0] != syncDeck)
 	{
 		console.log("we have a message: " + content); 
@@ -55,9 +71,12 @@ var onMessage = function(message) {
 	{
 		case playerTwoAdded: 
 		{
-			closePlayerMenu();
+			
 			otherplayer = content[1];
+			playerTwo[0] = otherplayer;
+			updatePlayer();
 			syncGame();
+			closePlayerMenu();
 			break;
 		}
 		
@@ -67,6 +86,11 @@ var onMessage = function(message) {
 			{
 				updateGameState(content);
 			}
+			break;
+		}
+		case newNetGame: 
+		{
+			updateGameState(content);
 			break;
 		}
 		
@@ -85,6 +109,16 @@ var onMessage = function(message) {
   
 }
 
+
+function newGameState(content)
+{
+	currentGame.innerHTML = content[1];
+	P = content[2];
+	playerTurn = content[3];
+	turnState = content[4];
+	updatePlayer();
+}
+
 function updateGameState(content)
 {
 	currentGame.innerHTML = content[1];
@@ -94,28 +128,35 @@ function updateGameState(content)
 	updatePlayer();
 }
 	
-
+function syncNewGame()
+{
+	var game = document.getElementById("game").innerHTML;
+	var gameData = [newNetGame, game, P, playerTurn, turnState];
+	sendMessage(gameid, gameData);
+	
+}
 
 function syncGame()
 {
 	var game = document.getElementById("game").innerHTML;
 	var gameData = [syncDeck, game, P, playerTurn, turnState];
 	sendMessage(gameid, gameData);
+	
 }
-
 
 var onOpened = function() {
   //figure out otherusername
-	console.log("onOpened"); 
-	playerType = document.getElementById("playerType").innerHTML;
+	console.log("onOpened");
 	
 	if(playerType > 1)
 	{
 		otherplayer = document.getElementById("hostplayer").innerHTML;
+		playerOne[0] = otherplayer;
 		var data = [playerTwoAdded, currentuser];
 		
 		sendMessage(gameid, data);
 		closePlayerMenu();
+		
 	}
 	      
 }
