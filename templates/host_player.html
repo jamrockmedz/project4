@@ -26,9 +26,13 @@
 
 <div class="clear"></div>
 <div id = "content">
-<div id="scoreBoard">
+
+<div id="net_turnArea">
+	
+<div id="net_scoreBoard">
 	<div id="area">
-		<div id="playername">{{ values.yourname }}</div>
+		<div><h2>Score</h2></div>
+		<div id="playername" style="display: none;">{{ values.yourname }}</div>
 		<div id="token" style="display: none;">{{ values.token }}</div>
 		<div id="gameid" style="display: none;">{{values.gameid}}</div>
 		<div id="playerType" style="display: none;">1</div>
@@ -37,6 +41,9 @@
 	</div>
 </div>
 
+<div id="playerTurnIcon"><div>Flip Card</div></div>
+
+</div>
 
 
 <div id="playerNameD" class="gameModeDialog">
@@ -91,9 +98,7 @@
 <br>
 <div id="game"></div>
 <div class="clear"></div>
-<div id="turnArea">
-<div id="playerOneTurn"><div>{{ values.yourname }}</div></div>
-</div>
+
 <div class="clear"></div>
 <div class="clear"></div>
 </div>

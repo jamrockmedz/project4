@@ -18,7 +18,8 @@ var P;
 var playerOne = [];
 var playerTwo = []; 
 var playerTurn;
-var playerOneTurn;
+var playerOneIcon;
+var playerTurnIcon;
 
 function attachEvent(element, type, handler)
 {
@@ -38,8 +39,7 @@ function newGame()
     	playerOne[1] = 0;
     	playerTwo[1] = 0;
     	turnState = 0;
-    	document.getElementById("playerOneScore").innerHTML = "";
-		document.getElementById("playerTwoScore").innerHTML = "";
+    	displayScore();
     	updatePlayer();
     }
     else
@@ -121,19 +121,16 @@ function setup()
 	attachEvent(document.getElementById("saveGame"), "click", saveGame);
 	attachEvent(document.getElementById("newGame"), "click", newGame);
 	
-	//attachEvent(document.getElementById("closePlayerNameD"), "click", closePlayerMenu);
+	playerTurnIcon = document.getElementById("playerTurnIcon");
 	
-		
-		//displayGameModeMenu(document.getElementById("gameMode"));
-		setUpTwoPlayerMode();
+	setUpTwoPlayerMode();
   
 }
 
 function closePlayerMenu()
 {
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
-		document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + 0;
-		document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +" Score: " + 0;
+		displayScore();
 		saveMPlayerDataToStorage();
 		
 		hideMenu(document.getElementById("playerNameD"));
@@ -148,8 +145,7 @@ function savePlayersName()
 			
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
 		saveMPlayerDataToStorage();
-		document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + 0;
-		document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +" Score: " + 0;
+		displayScore();
 		hideMenu(document.getElementById("playerNameD"));
 		updatePlayer();
 		
@@ -196,12 +192,10 @@ function hideMenu(menu)
 //setup two player game
 function setUpTwoPlayerMode(){
 		
-		playerOneTurn = document.getElementById("playerOneTurn");
 		displayGameModeMenu(document.getElementById("playerNameD"));
 		gameMode = 2;
 		createTwoPlayerGame();
-		document.getElementById("scoreBoard").style.display = "inherit";
-		playerOneTurn.style.display = "inherit";
+		playerTurnIcon.style.display = "inherit";
 			
 	}
 	
@@ -363,13 +357,14 @@ function changePlayer()
 function updatePlayer()
 {
 	
-	if(playerTurn > 1)
+	if(playerTurn == playerType)
 	{	
-		playerOneTurn.style.webkitAnimation = "stop 5s 0s infinite";
+		playerTurnIcon.className = 'greenflash';
+
 	}
 	else
 	{
-		playerOneTurn.style.webkitAnimation = "blink 5s 0s infinite";
+		playerTurnIcon.className = 'redflash';
 	}
 }
 
@@ -384,11 +379,15 @@ function updateScoreBoard()
 	{
 		playerOne[1]++;
 	}
-	document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +" Score: " + playerOne[1];
-	document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +" Score: " + playerTwo[1];
+	displayScore();
 	
 }
 
+function displayScore()
+{
+	document.getElementById("playerOneScore").innerHTML = "" + playerOne[0] +": " + playerOne[1];
+	document.getElementById("playerTwoScore").innerHTML = "" + playerTwo[0] +": " + playerTwo[1];
+}
 
     /*
      * Flip the card
@@ -469,15 +468,11 @@ function updateScoreBoard()
 								{
 									updateClass(x, "green");
 									updateClass(t, "green");
-									//x.style.boxShadow = "0 0 2px 2px grey inset, 0 0 2px 2px green";
-									//t.style.boxShadow = "0 0 2px 2px grey inset, 0 0 2px 2px green";
 								}
 								else
 								{
 									updateClass(x, "red");
 									updateClass(t, "red");
-									//x.style.boxShadow = "0 0 2px 2px grey inset, 0 0 2px 2px red";
-									//t.style.boxShadow = "0 0 2px 2px grey inset, 0 0 2px 2px red";
 								}
 							}
 							

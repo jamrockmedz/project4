@@ -29,14 +29,14 @@
 {
     font-size: 1em;
 }
- #playerOneTurn,   #playerTwoTurn {
-display: inline-block;
-width: 200px;
-position: relative;
-height: 200px;
-border-radius: 100%;
-margin-top: -45%;
-display: none;
+ #playerOneTurn,   #playerTwoTurn{
+	display: inline-block;
+	width: 200px;
+	position: relative;
+	height: 200px;
+	border-radius: 100%;
+	margin-top: -45%;
+	display: none;
 }
 
  #playerOneTurn > div ,   #playerTwoTurn > div{
@@ -45,10 +45,40 @@ display: none;
 	color: #fff;
 }
 
+#net_scoreBoard
+{		
+	width: 127px;
+	text-align: center;
+	line-height: 12px;
+	font-size: 12px;
+	text-align: center;
+	padding: 0 5px 10px 5px;
+	border-radius: 10px;
+	background: #003D46;
+	color: rgb(149, 253, 249);
+	box-shadow: 0 0 20px #FFF inset, 0 0 10px rgba(0, 0, 0, 0.62);
+	
+	
+}
 
-#turnArea
+#playerTurnIcon
 {
-   
+
+	margin: 40px auto;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	line-height: 100px;
+}
+
+#net_turnArea
+{
+	color: #CFCFCF;
+	font-size: large;
+	position: relative;
+	float: left;
+	width: 135px;
+	overflow: visible;
 }
 
 #playerOneTurn
@@ -89,15 +119,10 @@ display: none;
 
 #playerOneScore, #playerTwoScore, #winner
 {
-	border-radius: 10px;
-	height: 20px;
-	margin: auto;
-	vertical-align: middle;
-}
-
-#playerOneScore, #playerTwoScore, #winner
-{
-	border: solid black 1px;
+	border-radius: 25px;
+	height: 22px;
+	line-height: 22px;
+	box-shadow: 0 0 12px #000 inset, 0 0 20px rgba(0, 0, 0, 0.62);
 }
 
 #changeGameMode{
