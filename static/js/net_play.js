@@ -90,7 +90,7 @@ var onMessage = function(message) {
 		}
 		case newNetGame: 
 		{
-			updateGameState(content);
+			newGameState(content);
 			break;
 		}
 		
@@ -112,11 +112,21 @@ var onMessage = function(message) {
 
 function newGameState(content)
 {
+	playerOne[1] = 0;
+	playerTwo[1] = 0;
 	currentGame.innerHTML = content[1];
 	P = content[2];
 	playerTurn = content[3];
 	turnState = content[4];
 	updatePlayer();
+	displayScore();
+	document.getElementById("flip-front").innerHTML = "<h1>Memory Card Game</h1>";
+	pairedCards = [];
+	var temp = currentGame.querySelectorAll(".p");
+	for(var i = 0; i < temp.length; i++)
+	{
+		pairedCards[i] = temp[i];
+	}
 }
 
 function updateGameState(content)
