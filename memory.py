@@ -42,7 +42,7 @@ def two_player_network():
 						"gameid":gameid,
 						"token": channel.create_channel(name + gameid),
 						"yourname": name,
-						"url": 'project4.620057315.appspot.com/'+name+'/'+gameid
+						"url": 'http://project4.pr620057315.appspot.com/'+name+'/'+gameid
 						}
     
 	return render_template(
@@ -52,7 +52,7 @@ def two_player_network():
 		title='Memory Game'
 	)
 
-@app.route('/<hostplayer>/<gameid>')
+@app.route('/<string:hostplayer>/<string:gameid>')
 @auth.login_required
 def join_game(gameid,hostplayer):
 	"""Return a game page"""
@@ -68,7 +68,7 @@ def join_game(gameid,hostplayer):
 	return render_template("player.html", values=template_values)
 
 
-@app.route('/sendcontent/<user>/<gameid>', methods=['GET', 'POST'])
+@app.route('/sendcontent/<string:user>/<string:gameid>', methods=['GET', 'POST'])
 def sendmessage(user,gameid):
     """sends a message that is useless"""
     message = request.form['message']

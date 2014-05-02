@@ -1,15 +1,31 @@
 #leaderboard
 {
-	width: 100px;
-	border: 400px;
+	border: black solid 1px;
 	float:right;
-
+	width: 127px;
+	text-align: center;
+	line-height: 12px;
+	font-size: 12px;
+	text-align: center;
+	padding: 0 5px 10px 5px;
+	border-radius: 10px;
+	background: #003D46;
+	color: rgb(149, 253, 249);
+	box-shadow: 0 0 20px #FFF inset, 0 0 10px rgba(0, 0, 0, 0.62);
+	
+	
 }
 
-
-#scoreBoard
+#playerOneScore, #playerTwoScore, #winner
+{
+	border-radius: 25px;
+	height: 22px;
+	line-height: 22px;
+	box-shadow: 0 0 12px #000 inset, 0 0 20px rgba(0, 0, 0, 0.62);
+}
+.top_player
 {		
-	width: 157px;
+	width: 100px;
 	text-align: center;
 	position: absolute;
 	padding: 0 5px 5px 5px;
@@ -69,6 +85,8 @@
 	
 	
 }
+
+
 
 #playerTurnIcon
 {
