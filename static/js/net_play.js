@@ -9,6 +9,8 @@ var playerType;
 
 window.onload = function()
 {
+	attachEvent(document.getElementById("allTimeLink"), "click", getTopPlayers);
+	attachEvent(document.getElementById("weeklyLink"), "click", getTopPlayers);
 	
     currentuser = document.getElementById("playername").innerHTML;
     gameid = document.getElementById("gameid").innerHTML;
@@ -52,6 +54,14 @@ var onError = function() {
 	
 	//alert("we have an error"); 
 	
+}
+
+function getTopPlayers()
+{   
+	$('#allTimeLink').removeClass('active');
+	$('#weeklyLink').removeClass('active');
+	$(this).addClass('active');
+   
 }
 
 var onMessage = function(message) {
