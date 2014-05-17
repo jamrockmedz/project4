@@ -327,6 +327,11 @@ function announceWinner()
 	{
 		//document.getElementById("winner").innerHTML = "" + playerOne[0] + " WON!!!";
 		document.getElementById("flip-front").innerHTML =  "" + playerOne[0] + " WON!!!";
+		if(playerType < 2)
+		{
+			updateScoreDB();
+		}
+		
 	}
 	else if(playerOne[1] == playerTwo[1])
 	{
@@ -335,7 +340,14 @@ function announceWinner()
 	else
 	{
 		document.getElementById("flip-front").innerHTML =  "" + playerTwo[0] + " WON!!!";
+		if(playerType > 1)
+		{
+			updateScoreDB();
+		}
+		
 	}
+	
+	
 }
 
 //rotate the current player when called  

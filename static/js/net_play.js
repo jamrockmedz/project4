@@ -180,6 +180,37 @@ var onOpened = function() {
 	}
 	      
 }
+
+function updateScoreDB()
+{
+	updateAlltime();
+	updateWeekly();
+}
+
+function updateAlltime()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/alltime/update/', true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+}
+	
+	
+function updateWeekly()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/weekly/update/', true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+}
+
+function getAlltime()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/alltime/get/', true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+}
                           
 // function used to send messages to the server
 // these are then sent to the other user via
@@ -187,7 +218,6 @@ var onOpened = function() {
 // in the main.py file
 var sendMessage = function(gameid,data) 
 {
-	//data = [playerTwoAdded, ]
 	content = JSON.stringify(data);
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/sendcontent/' + otherplayer + '/' + gameid, true);
