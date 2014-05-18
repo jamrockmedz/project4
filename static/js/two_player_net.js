@@ -132,7 +132,6 @@ function closePlayerMenu()
 		document.getElementById("flip-back").innerHTML = "" + playerOne[0] + " VS " +  playerTwo[0];
 		displayScore();
 		saveMPlayerDataToStorage();
-		
 		hideMenu(document.getElementById("playerNameD"));
 		updatePlayer();
 }
@@ -348,6 +347,7 @@ function announceWinner()
 	}
 	
 	
+	getScoreBoard();	
 }
 
 //rotate the current player when called  

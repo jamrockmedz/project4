@@ -87,7 +87,8 @@ class weekly(Base):
   user_key = ndb.KeyProperty(kind=User, required=True)
   player_name = ndb.StringProperty()
   wins = ndb.IntegerProperty(default=0)
-
+  week = ndb.StringProperty(required=True)
+  year = ndb.StringProperty(required=True)
 
 class alltime(Base):
   user_key = ndb.KeyProperty(kind=User, required=True)

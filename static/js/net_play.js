@@ -5,14 +5,16 @@ var syncDeck = 3;
 var cardFlipped = 4;
 var newNetGame = 5;
 var alltimeRecieced = 6;
-var weeklyRecieced = 67
+var weeklyRecieced = 7
 var otherplayer = "";
 var playerType;
+var allTimeLeaderBoard;
+var weeklyLeaderBoard;
 
 window.onload = function()
 {
-	attachEvent(document.getElementById("allTimeLink"), "click", getTopPlayers);
-	attachEvent(document.getElementById("weeklyLink"), "click", getTopPlayers);
+	attachEvent(document.getElementById("allTimeLink"), "click", getATopPlayers);
+	attachEvent(document.getElementById("weeklyLink"), "click", getWTopPlayers);
 	
     currentuser = document.getElementById("playername").innerHTML;
     gameid = document.getElementById("gameid").innerHTML;
@@ -35,16 +37,10 @@ window.onload = function()
     socket.onerror = onError;
     socket.onclose = onClose;
 	
+	allTimeLeaderBoard = document.getElementById("alltime");
+	weeklyLeaderBoard = document.getElementById("weekly");
 	//alert("Current User: " + currentuser + " Gameid: " + gameid);
 }
-
-function test(){
-	
-	alert("Current User: " + currentuser + " Gameid: " + gameid);
-	return 1;
-
-}
-
 
 var onClose = function() {
 	
@@ -58,11 +54,25 @@ var onError = function() {
 	
 }
 
-function getTopPlayers()
+function getATopPlayers()
 {   
 	$('#allTimeLink').removeClass('active');
 	$('#weeklyLink').removeClass('active');
 	$(this).addClass('active');
+	weeklyLeaderBoard.style.display = "none";
+	allTimeLeaderBoard.style.display = "inherit";
+	scoreBoardData('/alltime/get/');
+   
+}
+
+function getWTopPlayers()
+{   
+	$('#allTimeLink').removeClass('active');
+	$('#weeklyLink').removeClass('active');
+	$(this).addClass('active');
+	weeklyLeaderBoard.style.display = "inherit";
+	allTimeLeaderBoard.style.display = "none";
+	scoreBoardData('/weekly/get/');
    
 }
 
@@ -78,8 +88,9 @@ var onMessage = function(message) {
 			otherplayer = content[1];
 			playerTwo[0] = otherplayer;
 			updatePlayer();
-			syncGame();
+			syncGame();			
 			closePlayerMenu();
+			getScoreBoard();
 			break;
 		}
 		
@@ -89,11 +100,13 @@ var onMessage = function(message) {
 			{
 				updateGameState(content);
 			}
+			getScoreBoard();
 			break;
 		}
 		case newNetGame: 
 		{
 			newGameState(content);
+			getScoreBoard();
 			break;
 		}
 		case cardFlipped: 
@@ -107,13 +120,13 @@ var onMessage = function(message) {
 		}
 		case alltimeRecieced:
 		{
-			console.log("we have a message: " + content); 
+			console.log("we have alltime: " + content); 
 			setAlltimeData(content);
 			break;
 		}
 		case weeklyRecieced:
 		{
-			console.log("we have a message: " + content); 
+			console.log("we have weekly: " + content); 
 			setWeeklyData();
 			break;
 		}
@@ -176,64 +189,65 @@ var onOpened = function() {
 		otherplayer = document.getElementById("hostplayer").innerHTML;
 		playerOne[0] = otherplayer;
 		var data = [playerTwoAdded, currentuser];
-		
 		sendMessage(gameid, data);
 		closePlayerMenu();
 		
 	}
+	
+	
 	      
 }
 
+function getScoreBoard()
+{
+	scoreBoardData('/alltime/get/');
+	scoreBoardData('/weekly/get/');
+}
+
+
 function updateScoreDB()
 {
-	updateAlltime();
-	updateWeekly();
+	scoreBoardData('/alltime/update/');
+	scoreBoardData('/weekly/update/');
 }
 
-function updateAlltime()
-{
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/alltime/update/', true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send();
-}
 
-function setAlltimeData()
+
+function setAlltimeData(content)
 {
-	console.log(this.responseText);
+	ranks = (document.getElementById("alltime")).children;
+	count = 0;
+	for(i = 1; i < content.length; i++)
+	{
+		ranks[count].innerHTML = "" + content[i].name + ": " + content[i].wins;
+		count++;
+	}
 }
 	
-function updateWeekly()
+	
+function setWeeklyData(content)
 {
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/weekly/update/', true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send();
+	ranks = (document.getElementById("weekly")).children;
+	count = 0;
+	for(i = 1; i < content.length; i++)
+	{
+		ranks[count].innerHTML = "" + content[i].name + ": " + content[i].wins;
+		count++;
+	}
 }
 
-function getAlltime()
-{
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/alltime/get/', true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send("data="+currentuser+gameid);
-}
-
-
-function getWeekly()
-{
-	var xhr = new XMLHttpRequest();
-	xhr.onload = setWeekly;
-	xhr.open('POST', '/weekly/get/', true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send("data="+currentuser+gameid);
-}
-
-                    
+                   
 // function used to send messages to the server
 // these are then sent to the other user via
-// the channel api, look for the /sendmessage route
-// in the main.py file
+// the channel api
+function scoreBoardData(uri)
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', uri, true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send("game="+currentuser + gameid);
+}
+
 var sendMessage = function(gameid,data) 
 {
 	content = JSON.stringify(data);

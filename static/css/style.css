@@ -68,7 +68,8 @@
 }
 
 .top_player{
-	color: black;
+	color: rgb(12, 207, 137);
+	font-size: 80%;
 	border-radius: 25px;
 	height: 22px;
 	line-height: 22px;

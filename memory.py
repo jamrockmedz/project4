@@ -4,12 +4,17 @@ import urllib2
 import json
 import random
 import uuid
+from datetime import *
 from google.appengine.api import users
 from google.appengine.api import channel
+from google.appengine.ext import ndb
 from utilities import funnames
+from array import *
 
 import auth
 import model
+from model import weekly
+from model import alltime
 
 from main import app
 
@@ -40,6 +45,11 @@ def update_alltime():
 @auth.login_required
 def update_weekly():	
 	results = model.weekly.query(model.weekly.user_key == auth.current_user_key()).fetch(1)	
+	
+	today=datetime.date(datetime.now())
+	week_num = today.strftime("%U")
+	year_num = today.strftime("%G")
+	
 	count = 0
 	for result in results:
 		count += 1
@@ -47,14 +57,18 @@ def update_weekly():
 	if count < 1:
 		user_db = auth.current_user_db()
 		name = user_db.name
-		weekly_db = model.weekly(user_key=auth.current_user_key(), player_name=name)
+		weekly_db = model.weekly(user_key=auth.current_user_key(), player_name=name, week=week_num, year=year_num)
 	else:
 		weekly_db = result;
-		
+		if (weekly_db.week != week_num) or (weekly_db.year != year_num):
+			weekly_db.wins = 0
+			weekly_db.week = week_num
+			weekly_db.year = year_num
+			   
 	weekly_db.wins += 1
 	
 	weekly_db.put()
-	return
+	return "success"
 	
 	
 
@@ -62,20 +76,38 @@ def update_weekly():
 @auth.login_required
 def get_alltime():
 	game = request.form['game']
-	results = model.alltime.query().order(alltime.wins).fetch(5,projection=[alltime.player_name, alltime.wins])
+	results = model.alltime.query().order(-model.alltime.wins).fetch(5)
 	i = 0
+	output = []
+	output.append(6)
 	for result in results:
-		output[i] = {'name': result.player_name, 'wins': result.wins}
+		output.append({'name': result.player_name, 'wins': result.wins})
 		
-	message = jsonify(output)
+	message = json.JSONEncoder().encode(output)
 	channel.send_message(game,message)
-	return
+	return "success"
+	
     
     
 @app.route('/weekly/get/', methods=['GET', 'POST'])
 @auth.login_required
 def get_weekly():
-	return
+	game = request.form['game']
+	today=datetime.date(datetime.now())
+	week_num = today.strftime("%U")
+	year_num = today.strftime("%G")
+	
+	"""results = model.weekly.query(model.weekly.week == week_num).order(-model.weekly.wins).fetch(5)"""
+	results = ndb.gql("SELECT * FROM weekly where week = '" + week_num + "' and year = '" + year_num + "'").fetch(5)
+	i = 0
+	output = []
+	output.append(7)
+	for result in results:
+		output.append({'name': result.player_name, 'wins': result.wins})
+		
+	message = json.JSONEncoder().encode(output)
+	channel.send_message(game,message)
+	return "success"
 	
 @app.route('/one_player/')
 def one_player():
