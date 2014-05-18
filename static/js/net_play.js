@@ -127,7 +127,7 @@ var onMessage = function(message) {
 		case weeklyRecieced:
 		{
 			console.log("we have weekly: " + content); 
-			setWeeklyData();
+			setWeeklyData(content);
 			break;
 		}
 	}
