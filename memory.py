@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask import render_template
+from flask import render_template, jsonify
 import urllib2
 import json
 import random
@@ -19,8 +19,7 @@ from main import app
 @app.route('/alltime/update/', methods=['GET', 'POST'])
 @auth.login_required
 def update_alltime():
-	results = model.alltime.query(model.alltime.user_key == auth.current_user_key()).fetch(1)
-	
+	results = model.alltime.query(model.alltime.user_key == auth.current_user_key()).fetch(1)	
 	count = 0
 	for result in results:
 		count += 1
@@ -35,29 +34,44 @@ def update_alltime():
 	alltime_db.wins += 1
 	
 	alltime_db.put()
-	return "" + alltime_db.wins
+	return "success"
+	
+@app.route('/weekly/update/', methods=['GET', 'POST'])
+@auth.login_required
+def update_weekly():	
+	results = model.weekly.query(model.weekly.user_key == auth.current_user_key()).fetch(1)	
+	count = 0
+	for result in results:
+		count += 1
+		
+	if count < 1:
+		user_db = auth.current_user_db()
+		name = user_db.name
+		weekly_db = model.weekly(user_key=auth.current_user_key(), player_name=name)
+	else:
+		weekly_db = result;
+		
+	weekly_db.wins += 1
+	
+	weekly_db.put()
+	return
+	
 	
 
 @app.route('/alltime/get/', methods=['GET', 'POST'])
 @auth.login_required
 def get_alltime():
-	results = model.alltime.query().filter(5).order(alltime.wins).fetch(projection=["alltime.player_name", "alltime.wins"])
+	game = request.form['game']
+	results = model.alltime.query().order(alltime.wins).fetch(5,projection=[alltime.player_name, alltime.wins])
 	i = 0
 	for result in results:
 		output[i] = {'name': result.player_name, 'wins': result.wins}
-	
-	return jsonify(output)
-	
-@app.route('/weekly/update/', methods=['GET', 'POST'])
-@auth.login_required
-def update_weekly():	
-	weekly_db = model.alltime(user_key=auth.current_user_key())
-	weekly_db.wins += 1
-	weekly_db.put()
-	weekly_db.put()
+		
+	message = jsonify(output)
+	channel.send_message(game,message)
 	return
-	
-
+    
+    
 @app.route('/weekly/get/', methods=['GET', 'POST'])
 @auth.login_required
 def get_weekly():

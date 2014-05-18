@@ -4,6 +4,8 @@ var playerTwoAdded = 2;
 var syncDeck = 3;
 var cardFlipped = 4;
 var newNetGame = 5;
+var alltimeRecieced = 6;
+var weeklyRecieced = 67
 var otherplayer = "";
 var playerType;
 
@@ -68,15 +70,6 @@ var onMessage = function(message) {
 
 	content = JSON.parse(message.data);
 	
-  
-	content = JSON.parse(message.data);
-	
-	if(content[0] != syncDeck)
-	{
-		console.log("we have a message: " + content); 
-	}
-	
-	
 	switch(content[0])
 	{
 		case playerTwoAdded: 
@@ -103,7 +96,6 @@ var onMessage = function(message) {
 			newGameState(content);
 			break;
 		}
-		
 		case cardFlipped: 
 		{
 			if(content[1] != playerType)
@@ -112,7 +104,18 @@ var onMessage = function(message) {
 				flipCard(card);
 			}
 			break;
-			
+		}
+		case alltimeRecieced:
+		{
+			console.log("we have a message: " + content); 
+			setAlltimeData(content);
+			break;
+		}
+		case weeklyRecieced:
+		{
+			console.log("we have a message: " + content); 
+			setWeeklyData();
+			break;
 		}
 	}
  
@@ -194,7 +197,11 @@ function updateAlltime()
 	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send();
 }
-	
+
+function setAlltimeData()
+{
+	console.log(this.responseText);
+}
 	
 function updateWeekly()
 {
@@ -209,9 +216,20 @@ function getAlltime()
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/alltime/get/', true);
 	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.send();
+	xhr.send("data="+currentuser+gameid);
 }
-                          
+
+
+function getWeekly()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.onload = setWeekly;
+	xhr.open('POST', '/weekly/get/', true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send("data="+currentuser+gameid);
+}
+
+                    
 // function used to send messages to the server
 // these are then sent to the other user via
 // the channel api, look for the /sendmessage route
