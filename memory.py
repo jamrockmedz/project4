@@ -97,8 +97,8 @@ def get_weekly():
 	week_num = today.strftime("%U")
 	year_num = today.strftime("%G")
 	
-	"""results = model.weekly.query(model.weekly.week == week_num).order(-model.weekly.wins).fetch(5)"""
-	results = ndb.gql("SELECT * FROM weekly where week = '" + week_num + "' and year = '" + year_num + "'").fetch(5)
+	results = model.weekly.query().order(-model.weekly.wins).fetch(5)
+	"""results = ndb.gql("SELECT * FROM weekly where week = '" + week_num + "' and year = '" + year_num + "'").order(-model.weekly.wins).fetch(5)"""
 	i = 0
 	output = []
 	output.append(7)

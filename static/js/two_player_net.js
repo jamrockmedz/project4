@@ -42,11 +42,6 @@ function newGame()
     	displayScore();
     	updatePlayer();
     }
-    else
-    {
-    	numTries = 24;
-    	document.getElementById("flip-back").innerHTML = "You have " + numTries + " flips!";
-    }
     
 	pairedCards = [];
 	gameOver = 1;
@@ -102,7 +97,7 @@ function loadGame()
 
 function setup()
 {
-   currentGame = document.getElementById("game");
+    currentGame = document.getElementById("game");
        
 	applause = document.createElement('audio');
 	boo = document.createElement('audio');
@@ -326,10 +321,6 @@ function announceWinner()
 	{
 		//document.getElementById("winner").innerHTML = "" + playerOne[0] + " WON!!!";
 		document.getElementById("flip-front").innerHTML =  "" + playerOne[0] + " WON!!!";
-		if(playerType < 2)
-		{
-			updateScoreDB();
-		}
 		
 	}
 	else if(playerOne[1] == playerTwo[1])
@@ -339,14 +330,10 @@ function announceWinner()
 	else
 	{
 		document.getElementById("flip-front").innerHTML =  "" + playerTwo[0] + " WON!!!";
-		if(playerType > 1)
-		{
-			updateScoreDB();
-		}
-		
+			
 	}
 	
-	
+	updateScoreDB();
 	getScoreBoard();	
 }
 
@@ -362,7 +349,7 @@ function changePlayer()
 		playerTurn = 2;
 	}
 	turnState = 0;
-	 updatePlayer();
+	updatePlayer();
 }
 
 //display the player switch to the user

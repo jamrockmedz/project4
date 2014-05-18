@@ -96,6 +96,7 @@ var onMessage = function(message) {
 		
 		case syncDeck: 
 		{
+			gameOver = 1;
 			if(playerType > 1)
 			{
 				updateGameState(content);
@@ -105,6 +106,7 @@ var onMessage = function(message) {
 		}
 		case newNetGame: 
 		{
+			gameOver = 1;
 			newGameState(content);
 			getScoreBoard();
 			break;
@@ -186,12 +188,13 @@ var onOpened = function() {
 	
 	if(playerType > 1)
 	{
+		console.log("un-necessary statements for player 2 called");
 		otherplayer = document.getElementById("hostplayer").innerHTML;
 		playerOne[0] = otherplayer;
 		var data = [playerTwoAdded, currentuser];
 		sendMessage(gameid, data);
 		closePlayerMenu();
-		
+		getScoreBoard();
 	}
 	
 	
