@@ -6,6 +6,8 @@
 #circle_option
 {
 	display: block;
+	font-family: 'Lobster', cursive;
+	margin: auto;
 	background: white;
 	border-radius: 1000px;
 	background-image: radial-gradient(rgb(0, 184, 255), transparent);
@@ -27,7 +29,7 @@
 
 #circle_option:hover
 {
-	background: orange;
+	background: #1e8cbe;
 	background-image: radial-gradient(rgb(0, 184, 255), transparent);
 	background-size: 5px 5px;
 	

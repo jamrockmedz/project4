@@ -1,3 +1,21 @@
+
+.jumbotron
+{
+
+	background: #1e8cbe;
+	border-bottom: 2px solid #005684;
+}
+
+.jumbotron h1:hover
+{
+	color: white;
+}
+
+.navbar-inverse {
+	background: #1e8cbe;
+	border-bottom: 2px solid #005684;
+}
+
 #leaderboard
 {
 	float:right;
@@ -79,12 +97,14 @@
 
 #scoreBoard
 {
-	background: white;
+	background: rgba(255, 255, 255, 0.26);
 	border-radius: 10px;
 	width: 186px;
 	padding: 0 5px 5px 5px;
 	position: relative;
 	float: left;
+	color: rgb(13, 76, 110);
+	text-align: center;
 }
 
 
@@ -109,6 +129,7 @@
 	width: 200px;
 	position: relative;
 	height: 200px;
+	text-align: center;
 	border-radius: 100%;
 	margin-top: -45%;
 	display: none;

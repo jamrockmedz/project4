@@ -1,7 +1,7 @@
 # extends 'base.html'
 
 <!-- manifest={{ url_for('static', filename='offline.manifest') }} type="text/cache-manifest" -->
-# block header
+# block head
 		<title>Memory Game</title>
         <script src="/p/js/one_player.js"></script>
 		<script src="/p/js/jquery.js"></script>
@@ -10,9 +10,8 @@
         <link rel="stylesheet" type"text/css" href="/p/css/memory.css"/>
 		<link rel="stylesheet" type"text/css" href="/p/css/indicator.css"/>
 # endblock
-
-# block content
-		<ul id="navigation">           
+# block slide_nav
+	<ul id="navigation">           
 					
             <li id="save"><a id="saveGame" title="Save Game">Save Game</a></li>
             
@@ -31,10 +30,11 @@
 				</div>
 			</li>
 			
-			
-			
-						            
+		            
 		</ul>
+# endblock
+# block content
+		
 
     
 

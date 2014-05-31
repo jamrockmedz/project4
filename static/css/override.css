@@ -1,0 +1,59 @@
+body
+{
+		background: #000000 url("/p/img/bush_bg.png") center no-repeat;
+}
+
+h1 small
+{
+	color: #E4E4E4;
+}
+.jumbotron
+{
+	background-color:rgba(255, 255, 255, 0.17);
+}
+
+.jumbotron h1
+{
+	color: #78c8e6;
+	font-family: 'Lobster', cursive;
+}
+
+.jumbotron h1:hover
+{
+	color: #88B5C5;;
+	
+}
+
+
+.navbar-inverse {
+	background: #1e8cbe;
+	border-bottom: 1px solid #005684;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #78c8e6;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #78c8e6;
+}
+
+
+.navbar-inverse .navbar-nav>.active>a
+{
+	background-color: rgba(0, 178, 202, 0.7);
+}
+
+
+.navbar-inverse .navbar-nav>.active>a:hover
+{
+	background-color: #0AC589;
+}
+
+footer
+{
+	background-color: rgba(12, 121, 170, 0.2);
+	border-top: none;
+	color: #000000;
+	
+}
