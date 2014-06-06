@@ -1,0 +1,24 @@
+# extends 'base.html'
+
+<!-- manifest={{ url_for('static', filename='offline.manifest') }} type="text/cache-manifest" -->
+# block head
+<script src="/p/js/jquery.js"></script>
+<script src="/p/js/flappy.js"></script>
+<link rel="stylesheet" type"text/css" href="/p/css/flappy.css"/>
+
+# endblock
+
+# block content
+<div id="flappyGameArea">
+<div id='board'>
+	<div id='score'></div>
+	<img  id='bird'class="c" src="/p/img/fb/b2.gif" style="z-index:5"/>
+	<img id='instr' class='c' src='/p/img/fb/instr.png' />
+  <!--
+	<div class="bg" id='bGrnd' style="top:-20px; height:320px; background-image:url(/p/img/fb/bg1.png) "/>
+	<div class="bg" id='fGrnd' style="top:235px; height:85px; z-index:4; background-image:url(/p/img/fb/bg2.png) "/>
+  -->
+</div>
+</div>
+# endblock
+ 

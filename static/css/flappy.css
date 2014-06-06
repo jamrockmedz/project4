@@ -1,0 +1,40 @@
+  img.c
+  { 
+    position:absolute; 
+  }
+	div.bg 
+  { 
+    position: absolute; 
+    left: 0px; 
+    width: 16000px; 
+    background-repeat: repeat-x; 
+  }
+
+  #flappyGameArea
+  {
+    margin:auto; 
+  }
+
+  #board
+  {
+    width:768px;
+    height:600px; 
+    overflow:hidden;
+  }
+  #score
+  {
+    position:relative;
+    float: right;
+    width: 100px;
+    height:25px; 
+		z-index:5;
+    color:blue;
+    font-weight:900'
+  }
+
+  #instr
+  {
+    margin: auto;
+    width: 30px;
+    z-index:100;
+  }

@@ -36,7 +36,10 @@ if config.DEVELOPMENT:
 def welcome():
   return flask.render_template('welcome.html', html_class='welcome')
 
-   
+@app.route('/flappy')
+def flappy():
+  return flask.render_template('flappy.html', html_class='flappy')
+
     
 ###############################################################################
 # Sitemap stuff
